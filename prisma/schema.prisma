@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model BusinessTask {
+  id              String     @id @default(cuid())
+  title           String
+  rawDraft        String     // исходный черновик от бизнеса
+  context         String?    // контекст и потребность
+  dataMaterials   String?    // данные и материалы
+  expectedResult  String?    // ожидаемый результат
+  successCriteria String?    // критерии успеха
+  constraints     String?    // ограничения
+  users           String?    // пользователи
+  contact         String?    // контакт и формат связи
+  score           Int        @default(0)
+  status          String     @default("draft") // draft | working | ready | priority
+  confirmed       Boolean    @default(false)
+  createdAt       DateTime   @default(now())
+  proposals       Proposal[]
+}
+
+model Proposal {
+  id        String       @id @default(cuid())
+  taskId    String
+  task      BusinessTask @relation(fields: [taskId], references: [id])
+  teamName  String
+  idea      String
+  plan      String
+  deadline  String?
+  link      String?
+  status    String       @default("pending") // pending | accepted | rejected
+  createdAt DateTime     @default(now())
+}

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-slate-50 text-slate-900 antialiased; }
+  input, textarea { @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100; }
+  label { @apply block space-y-2 text-sm font-medium; }
+}
+
+@layer components {
+  .card { @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm; }
+  .button { @apply inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50; }
+  .page-title { @apply text-3xl font-bold tracking-tight; }
+}
